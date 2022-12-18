@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { app } from '../app';
 
 let mongo: any;
+mongoose.set('strictQuery', true);
 beforeAll(async () => {
     process.env.JWT_KEY = 'asdfasdf';
 
