@@ -1,11 +1,11 @@
-const LandingPage = () => {
-  console.log("I am in the component");
-  return <h1>Landing Pages</h1>;
-};
+import axios from "axios";
 
-LandingPage.getInitialProps = () => {
-  console.log("I am on the server!");
-  return {};
+const LandingPage = ({ currentUser }) => {
+  console.log(currentUser);
+  axios.get("/api/users/currentuser").catch((err) => {
+    console.log(err.message);
+  });
+  return <h1>Landing Pages</h1>;
 };
 
 export default LandingPage;
