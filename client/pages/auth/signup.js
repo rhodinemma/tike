@@ -1,56 +1,48 @@
 import { useState } from "react";
-import axios from "axios";
+import UseRequest from "../../hooks/use-request";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const { doRequest, errors } = UseRequest({
+    url: "/api/users/signup",
+    method: "post",
+    body: {
+      email,
+      password,
+    },
+  });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post("/api/users/signup", {
-        email,
-        password,
-      });
-    } catch (err) {
-      setErrors(err.response.data.errors);
-    }
+    doRequest();
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <h1>Signup</h1>
-      <div className="form-group">
-        <label>Email Address</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          className="form-control"
-        />
-      </div>
-      {errors.length > 0 && (
-        <div className="alert alert-danger">
-          <h4>Oops...</h4>
-          <ul className="my-0">
-            {errors.map((err) => (
-              <li key={err.message}>{err.message}</li>
-            ))}
-          </ul>
+    <center>
+      <form onSubmit={onSubmit} className="col-md-6">
+        <h1>Signup</h1>
+        <div className="form-group">
+          <label>Email Address</label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="form-control"
+          />
         </div>
-      )}
-      <button className="btn btn-primary">Signup</button>
-    </form>
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            className="form-control"
+          />
+        </div>
+        {errors}
+        <button className="btn btn-primary">Signup</button>
+      </form>
+    </center>
   );
 };
 
