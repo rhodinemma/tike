@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { Andika } from "@next/font/google";
 import buildClient from "../api/build-client";
+import Header from "../components/header";
 
 const andika = Andika({
   weight: "400",
@@ -11,7 +12,7 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
     <main className={andika.className}>
       <div>
-        <h1>Header! {currentUser.email}</h1>
+        <Header currentUser={currentUser} />
         <Component {...pageProps} />
       </div>
     </main>
