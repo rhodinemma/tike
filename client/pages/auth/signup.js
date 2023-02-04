@@ -23,9 +23,9 @@ const Signup = () => {
 
   return (
     <center>
-      <form onSubmit={onSubmit} className="col-md-6">
+      <form onSubmit={onSubmit} className="col-md-6 mt-5">
         <h1>Signup</h1>
-        <div className="form-group">
+        <div className="form-group col-md-6 mt-3">
           <label>Email Address</label>
           <input
             value={email}
@@ -33,7 +33,7 @@ const Signup = () => {
             className="form-control"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group col-md-6 mt-3">
           <label>Password</label>
           <input
             value={password}
@@ -43,7 +43,7 @@ const Signup = () => {
           />
         </div>
         {errors}
-        <button className="btn btn-primary">Signup</button>
+        <button className="btn btn-primary mt-3">Signup</button>
       </form>
     </center>
   );
