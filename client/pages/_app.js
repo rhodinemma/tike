@@ -7,10 +7,13 @@ const andika = Andika({
   subsets: ["latin"],
 });
 
-const AppComponent = ({ Component, pageProps }) => {
+const AppComponent = ({ Component, pageProps, currentUser }) => {
   return (
     <main className={andika.className}>
-      <Component {...pageProps} />
+      <div>
+        <h1>Header! {currentUser.email}</h1>
+        <Component {...pageProps} />
+      </div>
     </main>
   );
 };
@@ -24,9 +27,10 @@ AppComponent.getInitialProps = async (appContext) => {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx);
   }
 
-  console.log(pageProps);
-
-  return data;
+  return {
+    pageProps,
+    ...data,
+  };
 };
 
 export default AppComponent;
